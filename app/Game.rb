@@ -1,7 +1,14 @@
 class Game
   attr_gtk
+  attr_reader :golf,
+              :level,
+              :collision_grid
+
   def initialize args
     @args = args
+    @golf = LDtk::LDtkBridge.new('assets/Golf.ldtk')
+    @level = @golf.get_level(:Level_0)
+    @collision_grid = @level.get_layer(:CollisionGrid)
 
     @ball = Ball.new(200, 200)
     outputs.static_sprites << @ball

@@ -1,3 +1,4 @@
+require 'lib/LDtkBridge.rb'
 require 'app/Game.rb'
 require 'app/Ball.rb'
 
