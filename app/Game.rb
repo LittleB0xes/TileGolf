@@ -7,16 +7,25 @@ class Game
   def initialize args
     @args = args
     @golf = LDtk::LDtkBridge.new('assets/Golf.ldtk')
-    @level = @golf.get_level(:Level_0)
+    @level_name = :Level_0
+    @level = @golf.get_level(@level_name)
     @collision_grid = @level.get_layer(:CollisionGrid)
 
     @ball = Ball.new(200, 200)
+    outputs.static_sprites << {
+      x: 0,
+      y: 0,
+      w: 1280,
+      h: 720,
+      path: "assets/Golf/png/" + @level_name.to_s + "-Ground.png",
+    }
     outputs.static_sprites << @ball
+    
   end
 
   def tick
     outputs.background_color = [0,0,0]
-    @ball.tick args
+    @ball.tick args, @collision_grid
 
     debug
   end
